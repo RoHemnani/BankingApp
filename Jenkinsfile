@@ -9,7 +9,7 @@ pipeline {
         stage('SCM_Checkout') {
             steps {
                 echo 'Perform SCM Checkout'
-                git 'https://github.com/SA-AWS-DevOps-July24/BankingApp.git'
+                git 'https://github.com/RoHemnani/BankingApp.git'
             }
         }
         stage('Application Build') {
@@ -21,8 +21,8 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo 'Perform Docker Build'
-				sh "docker build -t loksaieta/bankapp-eta-app:${BUILD_NUMBER} ."
-				sh "docker tag loksaieta/bankapp-eta-app:${BUILD_NUMBER} loksaieta/bankapp-eta-app:latest"
+				sh "docker build -t rohemp/bankapp-eta-app:${BUILD_NUMBER} ."
+				sh "docker tag rohemp/bankapp-eta-app:${BUILD_NUMBER} rohemp/bankapp-eta-app:latest"
 				sh 'docker image list'
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         stage('Publish the Image to Dockerhub') {
             steps {
                 echo 'Publish to DockerHub'
-				sh "docker push loksaieta/bankapp-eta-app:latest"                
+				sh "docker push rohemp/bankapp-eta-app:latest"                
             }
         }
         stage('Deploy to Kubernetes Cluster') {
